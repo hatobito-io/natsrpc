@@ -185,7 +185,6 @@ func startNATS() (*nserver.Server, error) {
 	opts := &nserver.Options{
 		Port: nserver.RANDOM_PORT,
 	}
-	opts.LogFile = "/tmp/zz.log"
 	return nserver.NewServer(opts)
 }
 
