@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package nrpc;
+
+option go_package = "github.com/hatobito-io/natsrpc/proto";
+
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/any.proto";
+
+// ErrorCode indicates to which class an Error belongs 
+enum ErrorCode {
+    UNKNOWN = 0;
+    SERVICE_UNAVAILABLE = 503;
+    SHUTTING_DOWN = 580;
+    TOOBUSY = 581;
+}
+
+// Error is used by services to return error information 
+message Error {
+    ErrorCode code = 1;
+    string message = 2;
+    string trace_id = 3;
+}
+
+// Sample is used for testing
+message Sample {
+    string message = 1;
+}
+
+// Response is the message that services send back
+// in response to requests. 
+message Response {
+    oneof ResultOrError {
+        Error error = 1;
+        google.protobuf.Any result = 2;
+    }
+}
