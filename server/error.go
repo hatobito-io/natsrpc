@@ -10,7 +10,7 @@ type Error = proto.Error
 // ErrorTooBusy is sent by the server if it cannot
 // serve a request
 var ErrorTooBusy = &Error{
-	Code:    proto.ErrorCode_TOOBUSY,
+	Code:    proto.ErrorCode_ResourceExhausted,
 	Message: "Server is too busy",
 }
 
@@ -18,6 +18,6 @@ var ErrorTooBusy = &Error{
 // if a request comes when the server in the
 // process of shutting down
 var ErrorShuttingDown = &Error{
-	Code:    proto.ErrorCode_SHUTTING_DOWN,
+	Code:    proto.ErrorCode_Unavailable,
 	Message: "Service is shutting down",
 }

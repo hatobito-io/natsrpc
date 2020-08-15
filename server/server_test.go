@@ -115,7 +115,7 @@ var _ = Describe("Server", func() {
 		Expect(err).To(Succeed())
 		Expect(reply).To(BeNil())
 		Expect(replyErr).ToNot(BeNil())
-		Expect(replyErr.Code).To(Equal(rpcproto.ErrorCode_TOOBUSY))
+		Expect(replyErr.Code).To(Equal(rpcproto.ErrorCode_ResourceExhausted))
 
 	})
 
