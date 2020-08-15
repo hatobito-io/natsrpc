@@ -27,7 +27,14 @@ type Request struct {
 func (req *Request) execute() {
 	reply, err := req.Handler(req)
 	if err != nil {
-		return
+		if perr, ok := err.(*rpcproto.Error); ok {
+			reply = perr
+		} else {
+			reply = &rpcproto.Error{
+				Code:    rpcproto.ErrorCode_Unknown,
+				Message: err.Error(),
+			}
+		}
 	}
 	req.sendReply(reply)
 }
